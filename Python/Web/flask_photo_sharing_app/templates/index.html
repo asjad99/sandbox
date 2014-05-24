@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    </title>
+    <body>
+        <style>
+        .item {
+            float:left;
+            width:220px;
+            margin:10px;
+        }
+        </style>
+       <script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='jquery.masonry.min.js') }}"></script>
+        <script type="text/javascript">
+
+        $(function(){
+            var $container = $('#container');
+            $container.imagesLoaded(function() {
+                $container.masonry({
+                    // options
+                    itemSelector : '.item',
+                    columnWidth : 240
+                });
+            });
+        });
+        </script>
+
+        <ul id="container">
+            {% for image in images %}
+            <img class="item" src="{{ url_for('static', filename=['gallery', image.filename ]|join('/')) }}"/>
+            {% endfor %}
+        </ul>
+        <p>miao</p>
+    </body>
+</html>
